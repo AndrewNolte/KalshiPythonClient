@@ -1,0 +1,4380 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This documentation describes Kalshi's rest API for market makers\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->",
+    "title": "Kalshi API.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/cached/markets": {
+      "get": {
+        "description": "End-point for listing / discovering markets on Kalshi with data that is cached and so slightly lagged.",
+        "operationId": "GetMarketsCached",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketsCached",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/cached/markets/{market_id}": {
+      "get": {
+        "description": "End-point for getting data about a specific market with data that is cached and so slightly lagged.\n\nThe value for the market_id path parameter should match the id value of the target market.",
+        "operationId": "GetMarketCached",
+        "parameters": [
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketCached",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/cached/markets/{market_id}/stats_history": {
+      "get": {
+        "description": "End-point for getting the statistics history for a market with data that is cached and so slightly lagged.\n\nThe value for the market_id path parameter should match the id value of the target market.\nThe last_seen_ts parameter is optional, and will restrict statistics to those after provided timestamp.\nThe last_seen_ts is inclusive, which means a market history point at last_seen_ts will be returned",
+        "operationId": "GetMarketHistoryCached",
+        "parameters": [
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "If provided, restricts history to trades starting from lastSeenTs",
+            "in": "query",
+            "name": "last_seen_ts",
+            "x-go-name": "LastSeenTs",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketHistoryCached",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/cached/markets_by_ticker/{ticker_name}": {
+      "get": {
+        "description": "End-point for getting data about a specific market with data that is cached and so slightly lagged.\n\nThe value for the ticker_name path parameter should match the ticker_name value of the target market.",
+        "operationId": "GetMarketByTickerCached",
+        "parameters": [
+          {
+            "description": "Should be filled with the ticker name of the target market",
+            "in": "path",
+            "name": "ticker_name",
+            "required": true,
+            "x-go-name": "TickerName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketByTickerCached",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/exchange/status": {
+      "get": {
+        "description": "End-point for getting the exchange status",
+        "operationId": "GetExchangeStatus",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ExchangeStatus"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "tags": [
+          "exchange"
+        ]
+      }
+    },
+    "/log_in": {
+      "post": {
+        "description": "End-point to start a rest session with Kalshi.",
+        "operationId": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "description": "Login input data"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/LoginResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "Login",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/log_out": {
+      "post": {
+        "description": "End-point to terminates your session with Kalshi.",
+        "operationId": "Logout",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "Logout",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/markets": {
+      "get": {
+        "description": "End-point for listing / discovering markets on Kalshi.",
+        "operationId": "GetMarkets",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarkets",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/markets/{market_id}": {
+      "get": {
+        "description": "End-point for getting data about a specific market.\n\nThe value for the market_id path parameter should match the id value of the target market.",
+        "operationId": "GetMarket",
+        "parameters": [
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarket",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/markets/{market_id}/order_book": {
+      "get": {
+        "description": "End-point for getting the orderbook for a market with data that is cached and so slightly lagged.\n\nThe value for the market_id path parameter should match the id value of the target market.",
+        "operationId": "GetMarketOrderBookCached",
+        "parameters": [
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketOrderBookResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketOrderBookCached",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/markets/{market_id}/stats_history": {
+      "get": {
+        "description": "End-point for getting the statistics history for a market.\n\nThe value for the market_id path parameter should match the id value of the target market.\nThe last_seen_ts parameter is optional, and will restrict statistics to those after provided timestamp.\nThe last_seen_ts is inclusive, which means a market history point at last_seen_ts will be returned",
+        "operationId": "GetMarketHistory",
+        "parameters": [
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "If provided, restricts history to trades starting from lastSeenTs",
+            "in": "query",
+            "name": "last_seen_ts",
+            "x-go-name": "LastSeenTs",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketHistory",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/markets_by_ticker/{ticker_name}": {
+      "get": {
+        "description": "End-point for getting data about a specific market based on its ticker.\n\nThe value for the ticker_name path parameter should match the ticker_name value of the target market.",
+        "operationId": "GetMarketByTicker",
+        "parameters": [
+          {
+            "description": "Should be filled with the ticker name of the target market",
+            "in": "path",
+            "name": "ticker_name",
+            "required": true,
+            "x-go-name": "TickerName",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetMarketResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetMarketByTicker",
+        "tags": [
+          "market"
+        ]
+      }
+    },
+    "/passwords/reset": {
+      "post": {
+        "description": "End-point to request a password reset email link.\n\nTo be used in case you forget your password.",
+        "operationId": "ResetPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "description": "Reset password input data"
+        },
+        "responses": {
+          "202": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "ResetPassword",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/passwords/reset/{code}/confirm": {
+      "put": {
+        "description": "End-point to finish the password reset flow.\n\nThe code param on the path should be filled with the verification code sent by email.",
+        "operationId": "ResetPasswordConfirm",
+        "parameters": [
+          {
+            "description": "Should be filled with the verification code received on the sign-up email.",
+            "in": "path",
+            "name": "code",
+            "required": true,
+            "x-go-name": "Code",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmPasswordResetRequest"
+              }
+            }
+          },
+          "description": "Data required to finish a password reset."
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "ResetPasswordConfirm",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/ranged_markets/{ranged_market_id}": {
+      "get": {
+        "description": "End-point for getting data about a ranged market",
+        "operationId": "GetRangedMarket",
+        "parameters": [
+          {
+            "description": "Should be filled in with a ranged market id",
+            "in": "path",
+            "name": "ranged_market_id",
+            "required": true,
+            "x-go-name": "RangedMarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetRangedMarketResponse",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRangedMarketResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetRangedMarket",
+        "tags": [
+          "ranged_market"
+        ]
+      }
+    },
+    "/ranged_markets_by_ticker/{ticker}": {
+      "get": {
+        "description": "End-point for getting data about a ranged market by its ticker",
+        "operationId": "GetRangedMarketByTicker",
+        "parameters": [
+          {
+            "description": "Should be the ticker of the ranged market",
+            "in": "path",
+            "name": "ticker",
+            "required": true,
+            "x-go-name": "Ticker",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GetRangedMarketByTickerResponse",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRangedMarketByTickerResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetRangedMarketByTicker",
+        "tags": [
+          "ranged_markets"
+        ]
+      }
+    },
+    "/trades": {
+      "get": {
+        "description": "End-point for getting all trades for all markets.",
+        "operationId": "GetTrades",
+        "parameters": [
+          {
+            "description": "Restricts the response to trades during a certain day. Format: YYYY-MM-DD",
+            "in": "query",
+            "name": "trades_date",
+            "x-go-name": "TradesDate",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Parameter to specify the number of results per page",
+            "in": "query",
+            "name": "page_size",
+            "x-go-name": "PageSize",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Parameter to specify which page of the results should be retrieved",
+            "in": "query",
+            "name": "page_number",
+            "x-go-name": "PageNumber",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TradesGetResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "summary": "GetTrades"
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "description": "End-point for retrieving the logged in user's profile.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserGetProfile",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetProfileResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetProfile",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/account/history": {
+      "get": {
+        "description": "End-point for getting the logged in user's important past actions and events related to the user's positions.\n\nThis contains entries for user's explicit actions but also for market events.\n\nThere will be entries for:\n\nsubmitting, editing / canceling orders\nrequesting deposits and withdrawals\ntrade execution (order matching)\nmarket settlements on markets where you have a position\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the\nlast login request (POST /log_in).",
+        "operationId": "UserGetAccountHistory",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "If true the response should include deposit entries",
+            "in": "query",
+            "name": "ShouldReturnDeposits",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true the response should include withdrawal entries",
+            "in": "query",
+            "name": "ShouldReturnWithdrawals",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true the response should include order entries",
+            "in": "query",
+            "name": "ShouldReturnOrders",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true the response should include settlement entries",
+            "in": "query",
+            "name": "ShouldReturnSettlements",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "If true the response should include trade entries",
+            "in": "query",
+            "name": "ShouldReturnTrades",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Restricts the response to a return the first \"limit\" amount of acct history items",
+            "in": "query",
+            "name": "Limit",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetAccountHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetAccountHistory",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/users/{user_id}/balance": {
+      "get": {
+        "description": "End-point for getting the balance of the logged in user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserGetBalance",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetBalanceResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetBalance",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/notifications": {
+      "get": {
+        "description": "End-point for getting notifications for the current logged in user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserGetNotifications",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Number of results per page",
+            "in": "query",
+            "name": "page_size",
+            "required": true,
+            "x-go-name": "PageSize",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "maximum": 50
+            }
+          },
+          {
+            "description": "Page of the results",
+            "in": "query",
+            "name": "page_number",
+            "required": true,
+            "x-go-name": "PageNumber",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetNotificationsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetNotifications",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/users/{user_id}/notifications/{notification_id}/read": {
+      "put": {
+        "description": "End-point for marking a notification as read.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).\n\nThe value for the notification_id path parameter should match the notification_id value of the notification to be marked as read.",
+        "operationId": "NotificationMarkRead",
+        "parameters": [
+          {
+            "description": "user_id should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "notification_id should be filled with the id of the notification to be mark as read",
+            "in": "path",
+            "name": "notification_id",
+            "required": true,
+            "x-go-name": "NotificationId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "NotificationMarkRead",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/users/{user_id}/notifications/preferences": {
+      "get": {
+        "description": "End-point for getting e-mail subscription mode for the current user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "GetNotificationPreferences",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetNotificationPreferencesResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "GetNotificationPreferences",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/users/{user_id}/orders": {
+      "get": {
+        "description": "End-point for getting all orders for the logged in user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserOrdersGet",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Restricts the response to orders in a single market",
+            "in": "query",
+            "name": "market_id",
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Restricts the response to orders in a single direction (yes or no)",
+            "in": "query",
+            "name": "is_yes",
+            "x-go-name": "IsYes",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a minimum price",
+            "in": "query",
+            "name": "min_price",
+            "x-go-name": "MinPrice",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a maximum price",
+            "in": "query",
+            "name": "max_price",
+            "x-go-name": "MaxPrice",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a minimum place count",
+            "in": "query",
+            "name": "min_place_count",
+            "x-go-name": "MinPlaceCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a maximum place count",
+            "in": "query",
+            "name": "max_place_count",
+            "x-go-name": "MaxPlaceCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a minimum initial count",
+            "in": "query",
+            "name": "min_initial_count",
+            "x-go-name": "MinInitialCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a maximum initial count",
+            "in": "query",
+            "name": "max_initial_count",
+            "x-go-name": "MaxInitialCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a minimum remaining resting contracts count",
+            "in": "query",
+            "name": "min_remaining_count",
+            "x-go-name": "MinRemainingCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to orders within a maximum remaining resting contracts count",
+            "in": "query",
+            "name": "max_remaining_count",
+            "x-go-name": "MaxRemainingCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to orders after a timestamp",
+            "in": "query",
+            "name": "min_date",
+            "x-go-name": "MinDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "description": "Restricts the response to orders before a timestamp",
+            "in": "query",
+            "name": "max_date",
+            "x-go-name": "MaxDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "description": "If true, gets the queue placement for every resting order returned",
+            "in": "query",
+            "name": "get_queue_position",
+            "x-go-name": "GetQueuePosition",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "Restricts the response to orders that have a certain status: resting, canceled, or executed",
+            "in": "query",
+            "name": "status",
+            "x-go-name": "Status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Parameter to specify the number of results per page",
+            "in": "query",
+            "name": "page_size",
+            "x-go-name": "PageSize",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Parameter to specify which page of the results should be retrieved",
+            "in": "query",
+            "name": "page_number",
+            "x-go-name": "PageNumber",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserOrdersGetResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserOrdersGet",
+        "tags": [
+          "user"
+        ]
+      },
+      "post": {
+        "description": "End-point for submitting orders in a market.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserOrderCreate",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOrderCreateRequest"
+              }
+            }
+          },
+          "description": "Order create input data"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/UserOrderCreateResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserOrderCreate",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/orders/{order_id}": {
+      "delete": {
+        "description": "End-point for canceling orders.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).\nThe value for the order_id should match the id field of the order you want to decrease.\nCommonly delete end-points return 204 status with no body content on success.\nBut we can't completely delete the order, as it may be partially filled already.\nSo what the delete end-point does is just reducing the order completely zeroing the remaining resting contracts on it.\nThe zeroed order is returned on the response payload, as a form of validation for the client.",
+        "operationId": "UserOrderCancel",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "This order_id should be filled with the id of the order to be decrease",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "x-go-name": "OrderId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserOrderCancelResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserOrderCancel",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/orders/{order_id}/decrease": {
+      "post": {
+        "description": "End-point for decreasing the number of contracts on orders. This is the only kind of edit we support on orders.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).\n\nThe value for the order_id should match the id field of the order you want to decrease.",
+        "operationId": "UserOrderDecrease",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "This order_id should be filled with the id of the order to be decrease",
+            "in": "path",
+            "name": "order_id",
+            "required": true,
+            "x-go-name": "OrderId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserOrderDecreaseRequest"
+              }
+            }
+          },
+          "description": "Order data"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/UserOrderDecreaseResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserOrderDecrease",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/password": {
+      "put": {
+        "description": "End-point for updating logged-in user password.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserChangePassword",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserChangePasswordRequest"
+              }
+            }
+          },
+          "description": "Change password input fields."
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserChangePassword",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/portfolio/history": {
+      "get": {
+        "description": "End-point for getting the logged in user's portfolio historical track.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserGetPortfolioHistory",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGetPortfolioHistoryRequest"
+              }
+            }
+          },
+          "description": "Order create input data"
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetPortfolioHistoryResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetPortfolioHistory",
+        "tags": [
+          "portfolio"
+        ]
+      }
+    },
+    "/users/{user_id}/positions": {
+      "get": {
+        "description": "End-point for getting all market positions for the logged in user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserGetMarketPositions",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetMarketPositionsResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetMarketPositions",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/positions/{market_id}": {
+      "get": {
+        "description": "End-point for getting the market positions for the logged in user, in a specific market.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).\n\nThe value for the market_id path parameter should match the id value of the target market.",
+        "operationId": "UserGetMarketPosition",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetMarketPositionResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetMarketPosition",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/subscribe": {
+      "put": {
+        "description": "End-point for changing e-mail subscription mode for the current user.\n\nThis end-point is very useful for users that have a large volume of orders and don't want to be email notified whenever an order is submitted / edited / canceled or matches.\n\nThis is specially useful for Market Makers.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "ChangeSubscription",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeSubscriptionRequest"
+              }
+            }
+          },
+          "description": "Change subscription data"
+        },
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "ChangeSubscription",
+        "tags": [
+          "account"
+        ]
+      }
+    },
+    "/users/{user_id}/trades": {
+      "get": {
+        "description": "End-point for getting all trades for the logged in user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserTradesGet",
+        "parameters": [
+          {
+            "description": "This parameter should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Restricts the response to trades in a specific market.",
+            "in": "query",
+            "name": "market_id",
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Restricts the response to trades related to a specific order.",
+            "in": "query",
+            "name": "order_id",
+            "x-go-name": "OrderId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Restricts the response to trades within a minimum price.",
+            "in": "query",
+            "name": "MinPrice",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Restricts the response to trades within a maximum price.",
+            "in": "query",
+            "name": "MaxPrice",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Restricts the response to trades within a minimum contracts count.",
+            "in": "query",
+            "name": "MinCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to trades within a maximum contracts count.",
+            "in": "query",
+            "name": "max_count",
+            "x-go-name": "MaxCount",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "description": "Restricts the response to trades after a timestamp.",
+            "in": "query",
+            "name": "min_date",
+            "x-go-name": "MinDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "description": "Restricts the response to trades before a timestamp.",
+            "in": "query",
+            "name": "max_date",
+            "x-go-name": "MaxDate",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "description": "Parameter to specify the number of results per page",
+            "in": "query",
+            "name": "page_size",
+            "x-go-name": "PageSize",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "description": "Parameter to specify which page of the results should be retrieved",
+            "in": "query",
+            "name": "page_number",
+            "x-go-name": "PageNumber",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserTradesGetResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserTradesGet",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/watchlist": {
+      "get": {
+        "description": "End-point for getting the market watchlist for the logged in user.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).",
+        "operationId": "UserGetWatchlist",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/UserGetWatchlistResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserGetWatchlist",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/users/{user_id}/watchlist/{market_id}": {
+      "delete": {
+        "description": "End-point for removing a market from the logged in user's watchlist.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).\n\nThe value for the market_id path parameter should match the id value of the market to be added.",
+        "operationId": "UserRemoveWatchlist",
+        "parameters": [
+          {
+            "description": "Should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "Should be filled with the id of the target market",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "503": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserRemoveWatchlist",
+        "tags": [
+          "user"
+        ]
+      },
+      "put": {
+        "description": "End-point for adding a market to the logged in user's watchlist.\n\nThe value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).\n\nThe value for the market_id path parameter should match the id value of the market to be added.",
+        "operationId": "UserAddWatchlist",
+        "parameters": [
+          {
+            "description": "user_id should be filled with your user_id provided on log_in",
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "x-go-name": "UserId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          },
+          {
+            "description": "market_id should be filled with the id of the market to be added to the watchlist",
+            "in": "path",
+            "name": "market_id",
+            "required": true,
+            "x-go-name": "MarketId",
+            "schema": {
+              "type": "string",
+              "format": "uuid4"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/EmptyResponse"
+          },
+          "400": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "401": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "403": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "404": {
+            "$ref": "#/components/responses/JSONError"
+          },
+          "500": {
+            "$ref": "#/components/responses/JSONError"
+          }
+        },
+        "security": [
+          {
+            "cookie": []
+          }
+        ],
+        "summary": "UserAddWatchlist",
+        "tags": [
+          "user"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://trading-api.kalshi.com/v1"
+    }
+  ],
+  "components": {
+    "responses": {
+      "EmptyResponse": {
+        "description": "No fields are returned on the response."
+      },
+      "ExchangeStatus": {
+        "description": "",
+        "headers": {
+          "exchange_active": {
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "trading_active": {
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "GetMarketHistoryResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetMarketHistoryResponse"
+            }
+          }
+        }
+      },
+      "GetMarketOrderBookResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetMarketOrderBookResponse"
+            }
+          }
+        }
+      },
+      "GetMarketResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetMarketResponse"
+            }
+          }
+        }
+      },
+      "GetMarketsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetMarketsResponse"
+            }
+          }
+        }
+      },
+      "GetNotificationPreferencesResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetNotificationPreferencesResponse"
+            }
+          }
+        }
+      },
+      "GetRangedMarket": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetRangedMarketResponse"
+            }
+          }
+        }
+      },
+      "GetRangedMarketByTicker": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetRangedMarketByTickerResponse"
+            }
+          }
+        }
+      },
+      "GetRangedMarkets": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetRangedMarketsResponse"
+            }
+          }
+        }
+      },
+      "GetUserDepositsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetUserDepositsResponse"
+            }
+          }
+        }
+      },
+      "GetUserWithdrawalsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetUserWithdrawalsResponse"
+            }
+          }
+        }
+      },
+      "JSONError": {
+        "description": "JSONError is a generic structure for API error responses.",
+        "headers": {
+          "code": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "details": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "service": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LoginResponse": {
+        "description": "",
+        "headers": {
+          "Set-Cookie": {
+            "description": "Access token is set on a cookie named 'sessions' as well",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/LoginResponse"
+            }
+          }
+        }
+      },
+      "TradesGetResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/TradesGetResponse"
+            }
+          }
+        }
+      },
+      "UserCreateResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CreateUserResponse"
+            }
+          }
+        }
+      },
+      "UserGetAccountHistoryResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetAccountHistoryResponse"
+            }
+          }
+        }
+      },
+      "UserGetBalanceResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetBalanceResponse"
+            }
+          }
+        }
+      },
+      "UserGetMarketPositionResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetMarketPositionResponse"
+            }
+          }
+        }
+      },
+      "UserGetMarketPositionsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetMarketPositionsResponse"
+            }
+          }
+        }
+      },
+      "UserGetNotificationsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetNotificationsResponse"
+            }
+          }
+        }
+      },
+      "UserGetPortfolioHistoryResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetPortfolioHistoryResponse"
+            }
+          }
+        }
+      },
+      "UserGetPortfolioValueResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetPortfolioValueResponse"
+            }
+          }
+        }
+      },
+      "UserGetProfileResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetProfileResponse"
+            }
+          }
+        }
+      },
+      "UserGetWatchlistResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserGetWatchlistResponse"
+            }
+          }
+        }
+      },
+      "UserListLedgerxBankAccountsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserListLedgerxBankAccountsResponse"
+            }
+          }
+        }
+      },
+      "UserOrderCancelResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserOrderDecreaseResponse"
+            }
+          }
+        }
+      },
+      "UserOrderCreateResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserOrderCreateResponse"
+            }
+          }
+        }
+      },
+      "UserOrderDecreaseResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserOrderDecreaseResponse"
+            }
+          }
+        }
+      },
+      "UserOrdersGetResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserOrdersGetResponse"
+            }
+          }
+        }
+      },
+      "UserRequestDepositResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserDepositResponse"
+            }
+          }
+        }
+      },
+      "UserRequestWithdrawalResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserWithdrawalResponse"
+            }
+          }
+        }
+      },
+      "UserTradesGetResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserTradesGetResponse"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookie": {
+        "in": "header",
+        "name": "Authorization",
+        "type": "apiKey"
+      }
+    },
+    "schemas": {
+      "AccountHistoryEntry": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountHistoryEntryData"
+          },
+          "type": {
+            "description": "Type of entry, one of Deposit, Withdrawal, Order, or Settlement",
+            "type": "string",
+            "x-go-name": "Type"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "AccountHistoryEntryData": {
+        "properties": {
+          "Deposit": {
+            "$ref": "#/components/schemas/DepositHistory"
+          },
+          "Order": {
+            "$ref": "#/components/schemas/OrderHistory"
+          },
+          "Settlement": {
+            "$ref": "#/components/schemas/SettlementHistory"
+          },
+          "Trade": {
+            "$ref": "#/components/schemas/TradeHistory"
+          },
+          "Withdrawal": {
+            "$ref": "#/components/schemas/WithdrawalHistory"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "BankAccountDetails": {
+        "description": "Encapsulates meta-data of bank accounts.\n\nThis is not stored within Kalshi, it is always proxied from the clearing house.",
+        "properties": {
+          "bank_id": {
+            "type": "string",
+            "x-go-name": "BankId"
+          },
+          "mask": {
+            "type": "string",
+            "x-go-name": "Mask"
+          },
+          "name": {
+            "type": "string",
+            "x-go-name": "Name"
+          },
+          "plaid_item_needs_relink": {
+            "type": "boolean",
+            "x-go-name": "Disconnected"
+          },
+          "routing_number": {
+            "type": "string",
+            "x-go-name": "RoutingNumber"
+          },
+          "subtype": {
+            "type": "string",
+            "x-go-name": "Subtype"
+          },
+          "type": {
+            "type": "string",
+            "x-go-name": "Type"
+          }
+        },
+        "required": [
+          "bank_id",
+          "name",
+          "mask",
+          "type",
+          "subtype",
+          "plaid_item_needs_relink"
+        ],
+        "title": "BankAccountDetails",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Cent": {
+        "format": "int64",
+        "type": "integer",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/types"
+      },
+      "ChangeSubscriptionRequest": {
+        "properties": {
+          "subscription_level": {
+            "description": "Specifies the subscription level for email notifications its values can be: \"none\", \"basic\" or \"all\"",
+            "type": "string",
+            "x-go-name": "Level"
+          }
+        },
+        "required": [
+          "subscription_level"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "ConfirmPasswordResetRequest": {
+        "properties": {
+          "password": {
+            "description": "The new password.",
+            "minLength": 6,
+            "type": "string",
+            "x-go-name": "Password"
+          },
+          "user_id": {
+            "description": "UserUUID for your user. You can get this from the password reset link query parameter.",
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "required": [
+          "user_id",
+          "password"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "CreateUserRequest": {
+        "properties": {
+          "email": {
+            "description": "A valid email for the new user.",
+            "example": "john@example.com",
+            "type": "string",
+            "x-go-name": "Email"
+          },
+          "password": {
+            "description": "Password for the new user account.",
+            "example": "s3cr3t",
+            "type": "string",
+            "x-go-name": "Password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "Request for creating a new user.",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "CreateUserResponse": {
+        "description": "Response for submitting an order",
+        "properties": {
+          "code": {
+            "description": "swagger: ignore",
+            "type": "string",
+            "x-go-name": "Code"
+          },
+          "user_id": {
+            "description": "user_id for the created user.",
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "required": [
+          "user_id"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Deposit": {
+        "description": "Represents a deposit.",
+        "properties": {
+          "amount_cents": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "bank_id": {
+            "type": "string",
+            "x-go-name": "BankId"
+          },
+          "created_ts": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedTs"
+          },
+          "deposit_type": {
+            "$ref": "#/components/schemas/DepositType"
+          },
+          "id": {
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "return_code": {
+            "type": "string",
+            "x-go-name": "ReturnCode"
+          },
+          "return_reason": {
+            "type": "string",
+            "x-go-name": "ReturnReason"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DepositStatus"
+          },
+          "user_id": {
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "title": "Deposit",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "DepositHistory": {
+        "description": "Represents a deposit account history item",
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedAt"
+          },
+          "deposit_type": {
+            "$ref": "#/components/schemas/DepositType"
+          },
+          "fee": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "returned_amount": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DepositStatus"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "UpdatedAt"
+          }
+        },
+        "title": "DepositHistory",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "DepositStatus": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/unimodel"
+      },
+      "DepositType": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/unimodel"
+      },
+      "GetMarketHistoryResponse": {
+        "properties": {
+          "market_stats_points": {
+            "items": {
+              "$ref": "#/components/schemas/MarketStatsPoint"
+            },
+            "type": "array",
+            "x-go-name": "MarketStatsPoints"
+          }
+        },
+        "required": [
+          "market_stats_points"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetMarketOrderBookResponse": {
+        "properties": {
+          "order_book": {
+            "$ref": "#/components/schemas/OrderBook"
+          }
+        },
+        "required": [
+          "order_book"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetNotificationPreferencesResponse": {
+        "properties": {
+          "preferences": {
+            "$ref": "#/components/schemas/SubscriptionPreference"
+          }
+        },
+        "required": [
+          "preferences"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetRangedMarketByTickerResponse": {
+        "properties": {
+          "ranged_markets": {
+            "$ref": "#/components/schemas/RangedMarket"
+          }
+        },
+        "required": [
+          "ranged_markets"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetRangedMarketResponse": {
+        "properties": {
+          "ranged_market": {
+            "$ref": "#/components/schemas/RangedMarket"
+          }
+        },
+        "required": [
+          "ranged_market"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetRangedMarketsResponse": {
+        "properties": {
+          "ranged_markets": {
+            "items": {
+              "$ref": "#/components/schemas/RangedMarket"
+            },
+            "type": "array",
+            "x-go-name": "RangedMarkets"
+          }
+        },
+        "required": [
+          "ranged_markets"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetUserDepositsResponse": {
+        "properties": {
+          "deposits": {
+            "description": "List of previous deposits for the user",
+            "items": {
+              "$ref": "#/components/schemas/Deposit"
+            },
+            "type": "array",
+            "x-go-name": "Deposits"
+          }
+        },
+        "required": [
+          "deposits"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "GetUserWithdrawalsResponse": {
+        "properties": {
+          "withdrawals": {
+            "description": "List of previous withdrawals for the user",
+            "items": {
+              "$ref": "#/components/schemas/Withdrawal"
+            },
+            "type": "array",
+            "x-go-name": "Withdrawals"
+          }
+        },
+        "required": [
+          "withdrawals"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "LoginRequest": {
+        "properties": {
+          "email": {
+            "description": "Email should be used as login identification credentials.",
+            "format": "email",
+            "type": "string",
+            "x-go-name": "Email"
+          },
+          "password": {
+            "description": "Password defined in the first step of the sign-up.",
+            "format": "password",
+            "minLength": 6,
+            "type": "string",
+            "x-go-name": "Password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "LoginResponse": {
+        "description": "Response for login request",
+        "properties": {
+          "access_level": {
+            "description": "Access level, to limit the access that applicants have",
+            "type": "string",
+            "x-go-name": "AccessLevel"
+          },
+          "token": {
+            "description": "Access token for an member role session in the api",
+            "type": "string",
+            "x-go-name": "Token"
+          },
+          "user_id": {
+            "description": "Your user_id, this will be required in all requests under the /users prefix",
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "required": [
+          "token",
+          "user_id",
+          "access_level"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Market": {
+        "description": "Market details",
+        "properties": {
+          "can_close_early": {
+            "type": "boolean",
+            "x-go-name": "CanCloseEarly"
+          },
+          "category": {
+            "type": "string",
+            "x-go-name": "Category"
+          },
+          "close_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CloseDate"
+          },
+          "close_unconfirmed": {
+            "type": "boolean",
+            "x-go-name": "CloseUnconfirmed"
+          },
+          "create_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreateDate"
+          },
+          "description_case_no": {
+            "type": "string",
+            "x-go-name": "DescriptionCaseNo"
+          },
+          "description_case_yes": {
+            "type": "string",
+            "x-go-name": "DescriptionCaseYes"
+          },
+          "description_context": {
+            "type": "string",
+            "x-go-name": "DescriptionContext"
+          },
+          "dollar_open_interest": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "DollarOpenInterest"
+          },
+          "dollar_recent_volume": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "DollarRecentVolume"
+          },
+          "dollar_volume": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "DollarVolume"
+          },
+          "expiration_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "ExpirationDate"
+          },
+          "expiration_value": {
+            "type": "string",
+            "x-go-name": "ExpirationValue"
+          },
+          "frequency_in_days": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "FrequencyInDays"
+          },
+          "id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "image_url": {
+            "type": "string",
+            "x-go-name": "ImageUrl"
+          },
+          "last_price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "list_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "ListDate"
+          },
+          "metrics_tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "x-go-name": "MetricsTags"
+          },
+          "min_tick_size": {
+            "type": "string",
+            "x-go-name": "MinTickSize"
+          },
+          "mini_title": {
+            "type": "string",
+            "x-go-name": "MiniTitle"
+          },
+          "open_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "OpenDate"
+          },
+          "open_interest": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "OpenInterest"
+          },
+          "option_type": {
+            "$ref": "#/components/schemas/MarketOptionType"
+          },
+          "original_expiration_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "OriginalExpirationDate"
+          },
+          "previous_price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "previous_yes_ask": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "previous_yes_bid": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "ranged_group_name": {
+            "type": "string",
+            "x-go-name": "RangedGroupName"
+          },
+          "ranged_group_ticker": {
+            "type": "string",
+            "x-go-name": "RangedGroupTicker"
+          },
+          "recent_volume": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "RecentVolume"
+          },
+          "result": {
+            "type": "string",
+            "x-go-name": "Result"
+          },
+          "settle_details": {
+            "type": "string",
+            "x-go-name": "SettleDetails"
+          },
+          "settlement_sources": {
+            "items": {
+              "$ref": "#/components/schemas/SettlementSource"
+            },
+            "type": "array",
+            "x-go-name": "SettlementSources"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MarketStatus"
+          },
+          "strike_price": {
+            "format": "double",
+            "type": "number",
+            "x-go-name": "StrikePrice"
+          },
+          "sub_title": {
+            "type": "string",
+            "x-go-name": "SubTitle"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "x-go-name": "Tags"
+          },
+          "ticker_name": {
+            "type": "string",
+            "x-go-name": "TickerName"
+          },
+          "title": {
+            "type": "string",
+            "x-go-name": "Title"
+          },
+          "underlying": {
+            "type": "string",
+            "x-go-name": "Underlying"
+          },
+          "volume": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Volume"
+          },
+          "yes_ask": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "yes_bid": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "MarketOptionType": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/unimodel"
+      },
+      "MarketPosition": {
+        "description": "MarketPosition is your accumulated position on a specific market considering all orders and trades.",
+        "properties": {
+          "fees_paid": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "final_position": {
+            "description": "Settlement stats",
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "FinalPosition"
+          },
+          "final_position_cost": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "market_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "position": {
+            "description": "Current stats",
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "Position"
+          },
+          "position_cost": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "realized_pnl": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "resting_orders_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "RestingOrdersCount"
+          },
+          "total_cost": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "user_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "UserId"
+          },
+          "volume": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "Volume"
+          }
+        },
+        "title": "MarketPosition",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "MarketStatsPoint": {
+        "properties": {
+          "dollar_open_interest": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "DollarOpenInterest"
+          },
+          "dollar_volume": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "DollarVolume"
+          },
+          "open_interest": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "OpenInterest"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "ts": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Time"
+          },
+          "volume": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Volume"
+          },
+          "yes_ask": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "yes_bid": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "MarketStatus": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/unimodel"
+      },
+      "Notification": {
+        "properties": {
+          "content": {
+            "additionalProperties": {
+              "type": "object"
+            },
+            "type": "object",
+            "x-go-name": "Content"
+          },
+          "created_ts": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedTs"
+          },
+          "id": {
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "is_delivered": {
+            "type": "boolean",
+            "x-go-name": "IsDelivered"
+          },
+          "is_read": {
+            "type": "boolean",
+            "x-go-name": "IsRead"
+          },
+          "link": {
+            "type": "string",
+            "x-go-name": "Link"
+          },
+          "type": {
+            "type": "string",
+            "x-go-name": "Type"
+          },
+          "user_id": {
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "NotificationList": {
+        "items": {
+          "$ref": "#/components/schemas/Notification"
+        },
+        "type": "array",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Order": {
+        "description": "Represents user orders in the api.\n\nWhen an order is matched multiple trades can be created this can be tracked by looking into the trade.order_id field.",
+        "properties": {
+          "close_cancel_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "CloseCancelCount"
+          },
+          "create_ts": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreateTs"
+          },
+          "decrease_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "DecreaseCount"
+          },
+          "expiration_ts": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "ExpirationTs"
+          },
+          "extra_cost": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "extra_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "ExtraCount"
+          },
+          "fcc_cancel_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "FccCancelCount"
+          },
+          "is_yes": {
+            "type": "boolean",
+            "x-go-name": "IsYes"
+          },
+          "last_update_op": {
+            "type": "string",
+            "x-go-name": "LastUpdateOperation"
+          },
+          "maker_fill_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "MakerFillCount"
+          },
+          "market_id": {
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "order_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "place_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "PlaceCount"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "queue_position": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "QueuePosition"
+          },
+          "remaining_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "RemainingCount"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "taker_fees": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "taker_fill_cost": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "taker_fill_count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "TakerFillCount"
+          },
+          "user_id": {
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "title": "Order",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "OrderBook": {
+        "description": "OrderBook\nContains the number of pending resting order for each price on a specific market.",
+        "properties": {
+          "no": {
+            "items": {
+              "$ref": "#/components/schemas/PriceLevel"
+            },
+            "type": "array",
+            "x-go-name": "No"
+          },
+          "yes": {
+            "items": {
+              "$ref": "#/components/schemas/PriceLevel"
+            },
+            "type": "array",
+            "x-go-name": "Yes"
+          }
+        },
+        "required": [
+          "yes",
+          "no"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "OrderHistory": {
+        "properties": {
+          "canceled_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "CanceledCount"
+          },
+          "close_cancel_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "CloseCancelCount"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedAt"
+          },
+          "fcc_canceled_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "FccCancelCount"
+          },
+          "filled_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "FilledCount"
+          },
+          "is_yes": {
+            "type": "boolean",
+            "x-go-name": "IsYes"
+          },
+          "market_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "market_title": {
+            "type": "string",
+            "x-go-name": "MarketTitle"
+          },
+          "original_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "OriginalCount"
+          },
+          "price": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Price"
+          },
+          "remaining_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "RemainingCount"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "UpdatedAt"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "OrderList": {
+        "items": {
+          "$ref": "#/components/schemas/Order"
+        },
+        "type": "array",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "OrderStatus": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/types"
+      },
+      "PortfolioMeasurement": {
+        "description": "Portfolio measurement is simply a snapshot of the portfolio of a user on a timestamp.",
+        "properties": {
+          "a": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "balance_change": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "cumulative_deposits": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "cumulative_number_settlements": {
+            "description": "Count of settlements member has had from account creation to timestamp (inclusive)",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "CumulativeNumberSettlements"
+          },
+          "cumulative_withdrawals": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "reason": {
+            "description": "Reason for the portfolio value change, if applicable",
+            "type": "string",
+            "x-go-name": "Reason"
+          },
+          "ts": {
+            "description": "Timestamp of the read in UNIX timestamp. (https://www.unixtimestamp.com/)",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "MeasurementTs"
+          },
+          "v": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "required": [
+          "a",
+          "v",
+          "ts",
+          "cumulative_deposits",
+          "cumulative_withdrawals",
+          "cumulative_number_settlements"
+        ],
+        "title": "PortfolioMeasurement",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "PriceLevel": {
+        "description": "PriceLevel\nIt is the state of a the market with respect to a specific price.\nIt is represented as an array of 2 integer values.\nThe first one is the price value and the second one is the total number of resting contract at that price among all orders.\nMinimum length: 2\nMaximum length: 2\nItems.0.Minimum: 1\nItems.0.Maximum: 99\nItems.1.Minimum: 0\nExample: [30, 50] means there are 50 resting",
+        "items": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "type": "array",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "PublicTrade": {
+        "description": "Represents a trade that can be displayed publicly. This does not include maker and taker information.\n\nA trade is created whenever an order is fully or partially matched.",
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "Count"
+          },
+          "create_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreateDate"
+          },
+          "market_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "trade_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "TradeId"
+          }
+        },
+        "title": "PublicTrade",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "PublicTradeList": {
+        "items": {
+          "$ref": "#/components/schemas/PublicTrade"
+        },
+        "type": "array",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "RangedMarket": {
+        "properties": {
+          "id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "mini_title": {
+            "type": "string",
+            "x-go-name": "MiniTitle"
+          },
+          "mutually_exclusive_side": {
+            "$ref": "#/components/schemas/Side"
+          },
+          "ticker": {
+            "type": "string",
+            "x-go-name": "Ticker"
+          },
+          "title": {
+            "type": "string",
+            "x-go-name": "Title"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "ResetPasswordRequest": {
+        "properties": {
+          "email": {
+            "description": "Email used to create your account",
+            "format": "email",
+            "type": "string",
+            "x-go-name": "Email"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "SettlementHistory": {
+        "properties": {
+          "determined_time": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "DeterminedTime"
+          },
+          "market_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "market_result": {
+            "type": "string",
+            "x-go-name": "MarketResult"
+          },
+          "market_title": {
+            "type": "string",
+            "x-go-name": "MarketTitle"
+          },
+          "no_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "NoCount"
+          },
+          "no_total_cost": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "NoTotalCost"
+          },
+          "profit": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Profit"
+          },
+          "settled_time": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "SettledTime"
+          },
+          "yes_count": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "YesCount"
+          },
+          "yes_total_cost": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "YesTotalCost"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "SettlementSource": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "x-go-name": "Name"
+          },
+          "url": {
+            "type": "string",
+            "x-go-name": "Url"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Side": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/unimodel"
+      },
+      "SubscriptionPreference": {
+        "properties": {
+          "subscription_level": {
+            "type": "string",
+            "x-go-name": "Preference"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "TradeHistory": {
+        "properties": {
+          "amount": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Amount"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedAt"
+          },
+          "fee": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Fee"
+          },
+          "is_yes": {
+            "type": "boolean",
+            "x-go-name": "IsYes"
+          },
+          "market_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "market_title": {
+            "type": "string",
+            "x-go-name": "MarketTitle"
+          },
+          "price": {
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "Price"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "TradeStatus": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/types"
+      },
+      "TradesGetResponse": {
+        "properties": {
+          "trades": {
+            "$ref": "#/components/schemas/PublicTradeList"
+          }
+        },
+        "required": [
+          "trades"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "User": {
+        "description": "Represents a user's profile on the api.",
+        "properties": {
+          "area_code": {
+            "type": "string",
+            "x-go-name": "AreaCode"
+          },
+          "birth_date": {
+            "type": "string",
+            "x-go-name": "BirthDate"
+          },
+          "city": {
+            "type": "string",
+            "x-go-name": "City"
+          },
+          "country": {
+            "type": "string",
+            "x-go-name": "Country"
+          },
+          "country_code": {
+            "type": "string",
+            "x-go-name": "CountryCode"
+          },
+          "created_ts": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedTs"
+          },
+          "email": {
+            "type": "string",
+            "x-go-name": "Email"
+          },
+          "finished_fre": {
+            "type": "boolean",
+            "x-go-name": "FinishedFre"
+          },
+          "first_name": {
+            "type": "string",
+            "x-go-name": "FirstName"
+          },
+          "last_name": {
+            "type": "string",
+            "x-go-name": "LastName"
+          },
+          "phone_number": {
+            "type": "string",
+            "x-go-name": "PhoneNumber"
+          },
+          "postal_code": {
+            "type": "string",
+            "x-go-name": "PostalCode"
+          },
+          "state": {
+            "type": "string",
+            "x-go-name": "State"
+          },
+          "street1": {
+            "type": "string",
+            "x-go-name": "Street1"
+          },
+          "street2": {
+            "type": "string",
+            "x-go-name": "Street2"
+          },
+          "use_bid_ask": {
+            "type": "boolean",
+            "x-go-name": "UseBidAsk"
+          },
+          "user_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "UserId"
+          },
+          "watchlist": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "x-go-name": "Watchlist"
+          },
+          "wire_code": {
+            "type": "string",
+            "x-go-name": "WireCode"
+          }
+        },
+        "title": "User",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserChangePasswordRequest": {
+        "properties": {
+          "new_password": {
+            "description": "New password value.",
+            "format": "password",
+            "type": "string",
+            "x-go-name": "NewPassword"
+          },
+          "old_password": {
+            "description": "Old password should be passed as a validation parameter.",
+            "format": "password",
+            "type": "string",
+            "x-go-name": "OldPassword"
+          }
+        },
+        "required": [
+          "old_password",
+          "new_password"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserDepositRequest": {
+        "properties": {
+          "amount_cents": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "bank_id": {
+            "type": "string",
+            "x-go-name": "BankId"
+          },
+          "fee_cents": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "required": [
+          "bank_id",
+          "amount_cents",
+          "fee_cents"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserDepositResponse": {
+        "properties": {
+          "deposit_id": {
+            "description": "Id for the deposit that was created.",
+            "type": "string",
+            "x-go-name": "DepositId"
+          }
+        },
+        "required": [
+          "deposit_id"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetAccountHistoryResponse": {
+        "properties": {
+          "entries": {
+            "description": "List of account history items for the user",
+            "items": {
+              "$ref": "#/components/schemas/AccountHistoryEntry"
+            },
+            "type": "array",
+            "x-go-name": "Entries"
+          }
+        },
+        "required": [
+          "entries"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetBalanceResponse": {
+        "properties": {
+          "balance": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "required": [
+          "balance"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetMarketPositionResponse": {
+        "properties": {
+          "market_position": {
+            "$ref": "#/components/schemas/MarketPosition"
+          }
+        },
+        "required": [
+          "market_position"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetMarketPositionsResponse": {
+        "properties": {
+          "market_positions": {
+            "description": "List of market positions",
+            "items": {
+              "$ref": "#/components/schemas/MarketPosition"
+            },
+            "type": "array",
+            "x-go-name": "Positions"
+          }
+        },
+        "required": [
+          "market_positions"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetMarketResponse": {
+        "properties": {
+          "market": {
+            "$ref": "#/components/schemas/Market"
+          }
+        },
+        "required": [
+          "market"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetMarketsResponse": {
+        "properties": {
+          "markets": {
+            "items": {
+              "$ref": "#/components/schemas/Market"
+            },
+            "type": "array",
+            "x-go-name": "Markets"
+          }
+        },
+        "required": [
+          "markets"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetNotificationsResponse": {
+        "properties": {
+          "notifications": {
+            "$ref": "#/components/schemas/NotificationList"
+          }
+        },
+        "required": [
+          "notifications"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetPortfolioHistoryRequest": {
+        "description": "Request for fetching user portfolio history",
+        "properties": {
+          "max_date": {
+            "description": "Restricts the response to orders before a timestamp\nin: query",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "MaxDate"
+          },
+          "max_ts": {
+            "description": "Restricts the response to orders before a timestamp in unix seconds, overrides max_date\nin: query",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "MaxTs"
+          },
+          "min_date": {
+            "description": "Restricts the response to orders after a timestamp\nin: query",
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "MinDate"
+          },
+          "min_ts": {
+            "description": "Restricts the response to orders after a timestamp in unix seconds, overrides min_date\nin: query",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "MinTs"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetPortfolioHistoryResponse": {
+        "properties": {
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/PortfolioMeasurement"
+            },
+            "type": "array",
+            "x-go-name": "Values"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetPortfolioValueResponse": {
+        "properties": {
+          "portfolio_value": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "required": [
+          "portfolio_value"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetProfileResponse": {
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          }
+        },
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserGetWatchlistResponse": {
+        "properties": {
+          "watchlist": {
+            "$ref": "#/components/schemas/Watchlist"
+          }
+        },
+        "required": [
+          "watchlist"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserListLedgerxBankAccountsResponse": {
+        "properties": {
+          "accounts": {
+            "items": {
+              "$ref": "#/components/schemas/BankAccountDetails"
+            },
+            "type": "array",
+            "x-go-name": "Accounts"
+          }
+        },
+        "required": [
+          "accounts"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserOrderCreateRequest": {
+        "description": "Request for submitting an order",
+        "properties": {
+          "count": {
+            "description": "Specifies how many contracts should be bought",
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "Count"
+          },
+          "expiration_unix_ts": {
+            "description": "Specifies the expiration time of the order, in unix seconds.  If this is not supplied, or is 0, the order won't expire.",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "ExpirationUnix"
+          },
+          "market_id": {
+            "description": "Specifies the id of the market for this order",
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "max_cost_cents": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "sell_position_capped": {
+            "description": "Specifies whether the order place count should be capped by the members current position.",
+            "type": "boolean",
+            "x-go-name": "SellPositionCapped"
+          },
+          "side": {
+            "description": "Specifies if this is a 'yes' or 'no' order",
+            "type": "string",
+            "x-go-name": "Side"
+          }
+        },
+        "required": [
+          "market_id",
+          "count",
+          "side",
+          "price"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserOrderCreateResponse": {
+        "description": "Response for submitting an order",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/Order"
+          },
+          "status": {
+            "description": "Status of the order submit operation",
+            "type": "string",
+            "x-go-name": "Status"
+          }
+        },
+        "required": [
+          "order",
+          "status"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserOrderDecreaseRequest": {
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "Count"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserOrderDecreaseResponse": {
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/Order"
+          },
+          "reduced_by": {
+            "description": "Status of the order submit operation",
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "ReducedBy"
+          }
+        },
+        "required": [
+          "order",
+          "reduced_by"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserOrdersGetResponse": {
+        "properties": {
+          "orders": {
+            "$ref": "#/components/schemas/OrderList"
+          }
+        },
+        "required": [
+          "orders"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserTrade": {
+        "description": "Represents a trade from the user perspective.\n\nA trade is created whenever an order is fully or partially matched, so there can be multiple trades with the same order_id.\nIt is guaranteed that the sum of the count field for all the trades with the same order_id field shouldn't exceed the place_count on the order.",
+        "properties": {
+          "count": {
+            "format": "int32",
+            "type": "integer",
+            "x-go-name": "Count"
+          },
+          "create_date": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreateDate"
+          },
+          "id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "is_taker": {
+            "type": "boolean",
+            "x-go-name": "IsTaker"
+          },
+          "is_yes": {
+            "type": "boolean",
+            "x-go-name": "IsYes"
+          },
+          "market_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "MarketId"
+          },
+          "order_id": {
+            "format": "uuid4",
+            "type": "string",
+            "x-go-name": "OrderId"
+          },
+          "price": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TradeStatus"
+          }
+        },
+        "title": "UserTrade",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserTradeList": {
+        "items": {
+          "$ref": "#/components/schemas/UserTrade"
+        },
+        "type": "array",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserTradesGetResponse": {
+        "properties": {
+          "trades": {
+            "$ref": "#/components/schemas/UserTradeList"
+          }
+        },
+        "required": [
+          "trades"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserUpdateProfileRequest": {
+        "properties": {
+          "area_code": {
+            "description": "User's phone area code.",
+            "example": "022",
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string",
+            "x-go-name": "AreaCode"
+          },
+          "birth_date": {
+            "type": "string",
+            "x-go-name": "BirthDate"
+          },
+          "city": {
+            "type": "string",
+            "x-go-name": "City"
+          },
+          "country": {
+            "description": "User's country 2 digits code",
+            "example": "US",
+            "maxLength": 2,
+            "minLength": 2,
+            "type": "string",
+            "x-go-name": "Country"
+          },
+          "country_code": {
+            "description": "User's phone country code. Should be 1 for now because only USA accounts are accepted.",
+            "example": "1",
+            "maxLength": 1,
+            "minLength": 1,
+            "type": "string",
+            "x-go-name": "CountryCode"
+          },
+          "finished_fre": {
+            "type": "boolean",
+            "x-go-name": "FinishedFre"
+          },
+          "first_name": {
+            "type": "string",
+            "x-go-name": "FirstName"
+          },
+          "last_name": {
+            "type": "string",
+            "x-go-name": "LastName"
+          },
+          "phone_number": {
+            "description": "User's phone number.",
+            "example": "4759128",
+            "maxLength": 7,
+            "minLength": 7,
+            "type": "string",
+            "x-go-name": "PhoneNumber"
+          },
+          "postal_code": {
+            "description": "User's address postal code",
+            "example": "92044",
+            "maxLength": 5,
+            "minLength": 5,
+            "type": "string",
+            "x-go-name": "PostalCode"
+          },
+          "state": {
+            "description": "User's state 2 digits code",
+            "example": "NY",
+            "maxLength": 2,
+            "minLength": 2,
+            "type": "string",
+            "x-go-name": "State"
+          },
+          "street1": {
+            "type": "string",
+            "x-go-name": "Street1"
+          },
+          "street2": {
+            "type": "string",
+            "x-go-name": "Street2"
+          },
+          "use_bid_ask": {
+            "type": "boolean",
+            "x-go-name": "UseBidAsk"
+          },
+          "watchlist": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "x-go-name": "Watchlist"
+          }
+        },
+        "required": [
+          "country_code",
+          "area_code",
+          "phone_number",
+          "state",
+          "postal_code",
+          "country"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserWithdrawalRequest": {
+        "properties": {
+          "amount_cents": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "bank_id": {
+            "type": "string",
+            "x-go-name": "BankId"
+          },
+          "fee_cents": {
+            "$ref": "#/components/schemas/Cent"
+          }
+        },
+        "required": [
+          "bank_id",
+          "amount_cents",
+          "fee_cents"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "UserWithdrawalResponse": {
+        "properties": {
+          "withdrawal_id": {
+            "description": "Id for the withdrawal that was created.",
+            "type": "string",
+            "x-go-name": "WithdrawalId"
+          }
+        },
+        "required": [
+          "withdrawal_id"
+        ],
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Watchlist": {
+        "description": "Watchlist is the list of markets that you have some activity on, this is used mostly by the UI.",
+        "properties": {
+          "market_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "x-go-name": "MarketIds"
+          }
+        },
+        "title": "Watchlist",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "Withdrawal": {
+        "description": "Represents a withdrawal.",
+        "properties": {
+          "amount_cents": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "bank_id": {
+            "type": "string",
+            "x-go-name": "BankId"
+          },
+          "created_ts": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedTs"
+          },
+          "id": {
+            "type": "string",
+            "x-go-name": "Id"
+          },
+          "return_code": {
+            "type": "string",
+            "x-go-name": "ReturnCode"
+          },
+          "return_reason": {
+            "type": "string",
+            "x-go-name": "ReturnReason"
+          },
+          "status": {
+            "$ref": "#/components/schemas/WithdrawalStatus"
+          },
+          "user_id": {
+            "type": "string",
+            "x-go-name": "UserId"
+          }
+        },
+        "title": "Withdrawal",
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "WithdrawalHistory": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CreatedAt"
+          },
+          "fee": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "returned_amount": {
+            "$ref": "#/components/schemas/Cent"
+          },
+          "status": {
+            "$ref": "#/components/schemas/WithdrawalStatus"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "UpdatedAt"
+          }
+        },
+        "type": "object",
+        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api/model"
+      },
+      "WithdrawalStatus": {
+        "type": "string",
+        "x-go-package": "github.com/Kalshi/exchange-infra/common/unimodel"
+      }
+    }
+  }
+}
