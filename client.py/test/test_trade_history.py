@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.trade_history import TradeHistory
+import kalshi
+from kalshi.model.trade_history import TradeHistory
 
 
 class TestTradeHistory(unittest.TestCase):

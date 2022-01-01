@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_get_balance_response import UserGetBalanceResponse
+import kalshi
+from kalshi.model.user_get_balance_response import UserGetBalanceResponse
 
 
 class TestUserGetBalanceResponse(unittest.TestCase):

@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.price_level import PriceLevel
+import kalshi
+from kalshi.model.price_level import PriceLevel
 
 
 class TestPriceLevel(unittest.TestCase):

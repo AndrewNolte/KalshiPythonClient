@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.deposit import Deposit
+import kalshi
+from kalshi.model.deposit import Deposit
 globals()['Deposit'] = Deposit
-from openapi_client.model.get_user_deposits_response import GetUserDepositsResponse
+from kalshi.model.get_user_deposits_response import GetUserDepositsResponse
 
 
 class TestGetUserDepositsResponse(unittest.TestCase):

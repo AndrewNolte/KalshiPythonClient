@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_order_create_request import UserOrderCreateRequest
+import kalshi
+from kalshi.model.user_order_create_request import UserOrderCreateRequest
 
 
 class TestUserOrderCreateRequest(unittest.TestCase):

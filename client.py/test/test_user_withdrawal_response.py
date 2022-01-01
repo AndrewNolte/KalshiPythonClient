@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_withdrawal_response import UserWithdrawalResponse
+import kalshi
+from kalshi.model.user_withdrawal_response import UserWithdrawalResponse
 
 
 class TestUserWithdrawalResponse(unittest.TestCase):

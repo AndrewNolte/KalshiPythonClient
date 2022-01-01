@@ -10,8 +10,8 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.market_api import MarketApi  # noqa: E501
+import kalshi
+from kalshi.api.market_api import MarketApi  # noqa: E501
 
 
 class TestMarketApi(unittest.TestCase):

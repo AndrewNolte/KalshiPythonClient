@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.settlement_history import SettlementHistory
+import kalshi
+from kalshi.model.settlement_history import SettlementHistory
 
 
 class TestSettlementHistory(unittest.TestCase):

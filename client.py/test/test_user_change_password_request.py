@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_change_password_request import UserChangePasswordRequest
+import kalshi
+from kalshi.model.user_change_password_request import UserChangePasswordRequest
 
 
 class TestUserChangePasswordRequest(unittest.TestCase):

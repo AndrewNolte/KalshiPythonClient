@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.ranged_market import RangedMarket
+import kalshi
+from kalshi.model.ranged_market import RangedMarket
 globals()['RangedMarket'] = RangedMarket
-from openapi_client.model.get_ranged_market_by_ticker_response import GetRangedMarketByTickerResponse
+from kalshi.model.get_ranged_market_by_ticker_response import GetRangedMarketByTickerResponse
 
 
 class TestGetRangedMarketByTickerResponse(unittest.TestCase):

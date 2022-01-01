@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.subscription_preference import SubscriptionPreference
+import kalshi
+from kalshi.model.subscription_preference import SubscriptionPreference
 
 
 class TestSubscriptionPreference(unittest.TestCase):

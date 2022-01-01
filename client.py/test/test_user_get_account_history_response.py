@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.account_history_entry import AccountHistoryEntry
+import kalshi
+from kalshi.model.account_history_entry import AccountHistoryEntry
 globals()['AccountHistoryEntry'] = AccountHistoryEntry
-from openapi_client.model.user_get_account_history_response import UserGetAccountHistoryResponse
+from kalshi.model.user_get_account_history_response import UserGetAccountHistoryResponse
 
 
 class TestUserGetAccountHistoryResponse(unittest.TestCase):

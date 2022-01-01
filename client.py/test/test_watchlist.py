@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.watchlist import Watchlist
+import kalshi
+from kalshi.model.watchlist import Watchlist
 
 
 class TestWatchlist(unittest.TestCase):

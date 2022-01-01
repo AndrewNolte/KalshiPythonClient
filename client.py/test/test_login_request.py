@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.login_request import LoginRequest
+import kalshi
+from kalshi.model.login_request import LoginRequest
 
 
 class TestLoginRequest(unittest.TestCase):

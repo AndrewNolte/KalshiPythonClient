@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.order_history import OrderHistory
+import kalshi
+from kalshi.model.order_history import OrderHistory
 
 
 class TestOrderHistory(unittest.TestCase):

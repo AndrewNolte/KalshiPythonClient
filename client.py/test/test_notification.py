@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.notification import Notification
+import kalshi
+from kalshi.model.notification import Notification
 
 
 class TestNotification(unittest.TestCase):

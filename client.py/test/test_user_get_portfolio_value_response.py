@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_get_portfolio_value_response import UserGetPortfolioValueResponse
+import kalshi
+from kalshi.model.user_get_portfolio_value_response import UserGetPortfolioValueResponse
 
 
 class TestUserGetPortfolioValueResponse(unittest.TestCase):

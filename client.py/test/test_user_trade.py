@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_trade import UserTrade
+import kalshi
+from kalshi.model.user_trade import UserTrade
 
 
 class TestUserTrade(unittest.TestCase):

@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.confirm_password_reset_request import ConfirmPasswordResetRequest
+import kalshi
+from kalshi.model.confirm_password_reset_request import ConfirmPasswordResetRequest
 
 
 class TestConfirmPasswordResetRequest(unittest.TestCase):

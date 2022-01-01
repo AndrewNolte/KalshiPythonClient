@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.price_level import PriceLevel
+import kalshi
+from kalshi.model.price_level import PriceLevel
 globals()['PriceLevel'] = PriceLevel
-from openapi_client.model.order_book import OrderBook
+from kalshi.model.order_book import OrderBook
 
 
 class TestOrderBook(unittest.TestCase):

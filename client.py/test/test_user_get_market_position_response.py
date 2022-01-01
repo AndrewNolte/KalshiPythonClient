@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.market_position import MarketPosition
+import kalshi
+from kalshi.model.market_position import MarketPosition
 globals()['MarketPosition'] = MarketPosition
-from openapi_client.model.user_get_market_position_response import UserGetMarketPositionResponse
+from kalshi.model.user_get_market_position_response import UserGetMarketPositionResponse
 
 
 class TestUserGetMarketPositionResponse(unittest.TestCase):

@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_update_profile_request import UserUpdateProfileRequest
+import kalshi
+from kalshi.model.user_update_profile_request import UserUpdateProfileRequest
 
 
 class TestUserUpdateProfileRequest(unittest.TestCase):

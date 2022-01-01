@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_deposit_response import UserDepositResponse
+import kalshi
+from kalshi.model.user_deposit_response import UserDepositResponse
 
 
 class TestUserDepositResponse(unittest.TestCase):

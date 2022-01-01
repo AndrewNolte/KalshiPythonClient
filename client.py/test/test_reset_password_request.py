@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.reset_password_request import ResetPasswordRequest
+import kalshi
+from kalshi.model.reset_password_request import ResetPasswordRequest
 
 
 class TestResetPasswordRequest(unittest.TestCase):

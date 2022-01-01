@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.deposit import Deposit
+import kalshi
+from kalshi.model.deposit import Deposit
 
 
 class TestDeposit(unittest.TestCase):

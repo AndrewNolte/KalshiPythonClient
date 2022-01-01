@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.portfolio_measurement import PortfolioMeasurement
+import kalshi
+from kalshi.model.portfolio_measurement import PortfolioMeasurement
 globals()['PortfolioMeasurement'] = PortfolioMeasurement
-from openapi_client.model.user_get_portfolio_history_response import UserGetPortfolioHistoryResponse
+from kalshi.model.user_get_portfolio_history_response import UserGetPortfolioHistoryResponse
 
 
 class TestUserGetPortfolioHistoryResponse(unittest.TestCase):

@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.order import Order
+import kalshi
+from kalshi.model.order import Order
 globals()['Order'] = Order
-from openapi_client.model.user_order_decrease_response import UserOrderDecreaseResponse
+from kalshi.model.user_order_decrease_response import UserOrderDecreaseResponse
 
 
 class TestUserOrderDecreaseResponse(unittest.TestCase):

@@ -10,8 +10,8 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.exchange_api import ExchangeApi  # noqa: E501
+import kalshi
+from kalshi.api.exchange_api import ExchangeApi  # noqa: E501
 
 
 class TestExchangeApi(unittest.TestCase):

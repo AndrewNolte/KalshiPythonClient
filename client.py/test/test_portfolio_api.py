@@ -10,8 +10,8 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.portfolio_api import PortfolioApi  # noqa: E501
+import kalshi
+from kalshi.api.portfolio_api import PortfolioApi  # noqa: E501
 
 
 class TestPortfolioApi(unittest.TestCase):

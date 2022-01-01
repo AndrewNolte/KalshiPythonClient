@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.portfolio_measurement import PortfolioMeasurement
+import kalshi
+from kalshi.model.portfolio_measurement import PortfolioMeasurement
 
 
 class TestPortfolioMeasurement(unittest.TestCase):

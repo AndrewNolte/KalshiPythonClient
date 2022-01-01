@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.create_user_request import CreateUserRequest
+import kalshi
+from kalshi.model.create_user_request import CreateUserRequest
 
 
 class TestCreateUserRequest(unittest.TestCase):

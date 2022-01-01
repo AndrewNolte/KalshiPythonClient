@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.withdrawal import Withdrawal
+import kalshi
+from kalshi.model.withdrawal import Withdrawal
 globals()['Withdrawal'] = Withdrawal
-from openapi_client.model.get_user_withdrawals_response import GetUserWithdrawalsResponse
+from kalshi.model.get_user_withdrawals_response import GetUserWithdrawalsResponse
 
 
 class TestGetUserWithdrawalsResponse(unittest.TestCase):

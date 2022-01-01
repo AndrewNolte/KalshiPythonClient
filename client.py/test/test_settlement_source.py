@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.settlement_source import SettlementSource
+import kalshi
+from kalshi.model.settlement_source import SettlementSource
 
 
 class TestSettlementSource(unittest.TestCase):

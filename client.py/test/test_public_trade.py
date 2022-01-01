@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.public_trade import PublicTrade
+import kalshi
+from kalshi.model.public_trade import PublicTrade
 
 
 class TestPublicTrade(unittest.TestCase):

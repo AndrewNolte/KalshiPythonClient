@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_trade import UserTrade
+import kalshi
+from kalshi.model.user_trade import UserTrade
 globals()['UserTrade'] = UserTrade
-from openapi_client.model.user_trade_list import UserTradeList
+from kalshi.model.user_trade_list import UserTradeList
 
 
 class TestUserTradeList(unittest.TestCase):

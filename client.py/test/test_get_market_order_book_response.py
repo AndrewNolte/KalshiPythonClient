@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.order_book import OrderBook
+import kalshi
+from kalshi.model.order_book import OrderBook
 globals()['OrderBook'] = OrderBook
-from openapi_client.model.get_market_order_book_response import GetMarketOrderBookResponse
+from kalshi.model.get_market_order_book_response import GetMarketOrderBookResponse
 
 
 class TestGetMarketOrderBookResponse(unittest.TestCase):

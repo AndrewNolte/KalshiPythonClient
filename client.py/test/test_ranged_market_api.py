@@ -10,8 +10,8 @@
 
 import unittest
 
-import openapi_client
-from openapi_client.api.ranged_market_api import RangedMarketApi  # noqa: E501
+import kalshi
+from kalshi.api.ranged_market_api import RangedMarketApi  # noqa: E501
 
 
 class TestRangedMarketApi(unittest.TestCase):

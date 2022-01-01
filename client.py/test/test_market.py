@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.settlement_source import SettlementSource
+import kalshi
+from kalshi.model.settlement_source import SettlementSource
 globals()['SettlementSource'] = SettlementSource
-from openapi_client.model.market import Market
+from kalshi.model.market import Market
 
 
 class TestMarket(unittest.TestCase):

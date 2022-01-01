@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.change_subscription_request import ChangeSubscriptionRequest
+import kalshi
+from kalshi.model.change_subscription_request import ChangeSubscriptionRequest
 
 
 class TestChangeSubscriptionRequest(unittest.TestCase):

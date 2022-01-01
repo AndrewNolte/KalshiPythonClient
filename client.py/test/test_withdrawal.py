@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.withdrawal import Withdrawal
+import kalshi
+from kalshi.model.withdrawal import Withdrawal
 
 
 class TestWithdrawal(unittest.TestCase):

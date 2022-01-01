@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.watchlist import Watchlist
+import kalshi
+from kalshi.model.watchlist import Watchlist
 globals()['Watchlist'] = Watchlist
-from openapi_client.model.user_get_watchlist_response import UserGetWatchlistResponse
+from kalshi.model.user_get_watchlist_response import UserGetWatchlistResponse
 
 
 class TestUserGetWatchlistResponse(unittest.TestCase):

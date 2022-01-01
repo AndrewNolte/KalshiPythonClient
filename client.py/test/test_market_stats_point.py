@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.market_stats_point import MarketStatsPoint
+import kalshi
+from kalshi.model.market_stats_point import MarketStatsPoint
 
 
 class TestMarketStatsPoint(unittest.TestCase):

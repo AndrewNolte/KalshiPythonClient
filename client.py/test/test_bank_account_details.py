@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.bank_account_details import BankAccountDetails
+import kalshi
+from kalshi.model.bank_account_details import BankAccountDetails
 
 
 class TestBankAccountDetails(unittest.TestCase):

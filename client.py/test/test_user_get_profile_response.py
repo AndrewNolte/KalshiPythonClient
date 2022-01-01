@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user import User
+import kalshi
+from kalshi.model.user import User
 globals()['User'] = User
-from openapi_client.model.user_get_profile_response import UserGetProfileResponse
+from kalshi.model.user_get_profile_response import UserGetProfileResponse
 
 
 class TestUserGetProfileResponse(unittest.TestCase):

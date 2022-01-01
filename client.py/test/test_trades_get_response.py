@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.public_trade_list import PublicTradeList
+import kalshi
+from kalshi.model.public_trade_list import PublicTradeList
 globals()['PublicTradeList'] = PublicTradeList
-from openapi_client.model.trades_get_response import TradesGetResponse
+from kalshi.model.trades_get_response import TradesGetResponse
 
 
 class TestTradesGetResponse(unittest.TestCase):

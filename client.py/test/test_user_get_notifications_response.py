@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.notification_list import NotificationList
+import kalshi
+from kalshi.model.notification_list import NotificationList
 globals()['NotificationList'] = NotificationList
-from openapi_client.model.user_get_notifications_response import UserGetNotificationsResponse
+from kalshi.model.user_get_notifications_response import UserGetNotificationsResponse
 
 
 class TestUserGetNotificationsResponse(unittest.TestCase):

@@ -11,18 +11,18 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.deposit_history import DepositHistory
-from openapi_client.model.order_history import OrderHistory
-from openapi_client.model.settlement_history import SettlementHistory
-from openapi_client.model.trade_history import TradeHistory
-from openapi_client.model.withdrawal_history import WithdrawalHistory
+import kalshi
+from kalshi.model.deposit_history import DepositHistory
+from kalshi.model.order_history import OrderHistory
+from kalshi.model.settlement_history import SettlementHistory
+from kalshi.model.trade_history import TradeHistory
+from kalshi.model.withdrawal_history import WithdrawalHistory
 globals()['DepositHistory'] = DepositHistory
 globals()['OrderHistory'] = OrderHistory
 globals()['SettlementHistory'] = SettlementHistory
 globals()['TradeHistory'] = TradeHistory
 globals()['WithdrawalHistory'] = WithdrawalHistory
-from openapi_client.model.account_history_entry_data import AccountHistoryEntryData
+from kalshi.model.account_history_entry_data import AccountHistoryEntryData
 
 
 class TestAccountHistoryEntryData(unittest.TestCase):

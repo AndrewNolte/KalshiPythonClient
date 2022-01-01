@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_get_portfolio_history_request import UserGetPortfolioHistoryRequest
+import kalshi
+from kalshi.model.user_get_portfolio_history_request import UserGetPortfolioHistoryRequest
 
 
 class TestUserGetPortfolioHistoryRequest(unittest.TestCase):

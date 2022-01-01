@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.user_order_decrease_request import UserOrderDecreaseRequest
+import kalshi
+from kalshi.model.user_order_decrease_request import UserOrderDecreaseRequest
 
 
 class TestUserOrderDecreaseRequest(unittest.TestCase):

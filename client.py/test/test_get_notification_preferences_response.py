@@ -11,10 +11,10 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.subscription_preference import SubscriptionPreference
+import kalshi
+from kalshi.model.subscription_preference import SubscriptionPreference
 globals()['SubscriptionPreference'] = SubscriptionPreference
-from openapi_client.model.get_notification_preferences_response import GetNotificationPreferencesResponse
+from kalshi.model.get_notification_preferences_response import GetNotificationPreferencesResponse
 
 
 class TestGetNotificationPreferencesResponse(unittest.TestCase):

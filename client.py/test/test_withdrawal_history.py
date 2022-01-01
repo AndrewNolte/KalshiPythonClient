@@ -11,8 +11,8 @@
 import sys
 import unittest
 
-import openapi_client
-from openapi_client.model.withdrawal_history import WithdrawalHistory
+import kalshi
+from kalshi.model.withdrawal_history import WithdrawalHistory
 
 
 class TestWithdrawalHistory(unittest.TestCase):
