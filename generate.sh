@@ -1,5 +1,5 @@
 openapi-generator generate \
     -i swagger.json \
     -g python \
-    -o ./client.py \
-    --additional-properties=packageName=kalshi
+    -o ./client \
+    --additional-properties packageName=kalshi,projectName=kalshi
