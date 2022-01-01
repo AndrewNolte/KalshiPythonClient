@@ -1,4 +1,4 @@
-# openapi_client.AuthApi
+# kalshi.AuthApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -21,20 +21,20 @@ End-point to start a rest session with Kalshi.
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import auth_api
-from openapi_client.model.login_response import LoginResponse
-from openapi_client.model.login_request import LoginRequest
+import kalshi
+from kalshi.api import auth_api
+from kalshi.model.login_response import LoginResponse
+from kalshi.model.login_request import LoginRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = auth_api.AuthApi(api_client)
     login_request = LoginRequest(
@@ -48,7 +48,7 @@ with openapi_client.ApiClient() as api_client:
         # Login
         api_response = api_instance.login(login_request=login_request)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AuthApi->login: %s\n" % e)
 ```
 
@@ -97,12 +97,12 @@ End-point to terminates your session with Kalshi.
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import auth_api
+import kalshi
+from kalshi.api import auth_api
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -118,7 +118,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = auth_api.AuthApi(api_client)
 
@@ -126,7 +126,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # Logout
         api_instance.logout()
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AuthApi->logout: %s\n" % e)
 ```
 
@@ -171,19 +171,19 @@ End-point to request a password reset email link.  To be used in case you forget
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import auth_api
-from openapi_client.model.reset_password_request import ResetPasswordRequest
+import kalshi
+from kalshi.api import auth_api
+from kalshi.model.reset_password_request import ResetPasswordRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = auth_api.AuthApi(api_client)
     reset_password_request = ResetPasswordRequest(
@@ -195,7 +195,7 @@ with openapi_client.ApiClient() as api_client:
     try:
         # ResetPassword
         api_instance.reset_password(reset_password_request=reset_password_request)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AuthApi->reset_password: %s\n" % e)
 ```
 
@@ -241,19 +241,19 @@ End-point to finish the password reset flow.  The code param on the path should 
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import auth_api
-from openapi_client.model.confirm_password_reset_request import ConfirmPasswordResetRequest
+import kalshi
+from kalshi.api import auth_api
+from kalshi.model.confirm_password_reset_request import ConfirmPasswordResetRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = auth_api.AuthApi(api_client)
     code = "code_example" # str | Should be filled with the verification code received on the sign-up email.
@@ -266,7 +266,7 @@ with openapi_client.ApiClient() as api_client:
     try:
         # ResetPasswordConfirm
         api_instance.reset_password_confirm(code)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AuthApi->reset_password_confirm: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -274,7 +274,7 @@ with openapi_client.ApiClient() as api_client:
     try:
         # ResetPasswordConfirm
         api_instance.reset_password_confirm(code, confirm_password_reset_request=confirm_password_reset_request)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AuthApi->reset_password_confirm: %s\n" % e)
 ```
 

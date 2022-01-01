@@ -1,4 +1,4 @@
-# openapi_client.UserApi
+# kalshi.UserApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -31,12 +31,12 @@ End-point for adding a market to the logged in user's watchlist.  The value for 
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
+import kalshi
+from kalshi.api import user_api
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -52,7 +52,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | user_id should be filled with your user_id provided on log_in
@@ -62,7 +62,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # UserAddWatchlist
         api_instance.user_add_watchlist(user_id, market_id)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_add_watchlist: %s\n" % e)
 ```
 
@@ -112,13 +112,13 @@ End-point for updating logged-in user password.  The value for the user_id path 
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_change_password_request import UserChangePasswordRequest
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_change_password_request import UserChangePasswordRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -134,7 +134,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -147,7 +147,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # UserChangePassword
         api_instance.user_change_password(user_id)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_change_password: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -155,7 +155,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # UserChangePassword
         api_instance.user_change_password(user_id, user_change_password_request=user_change_password_request)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_change_password: %s\n" % e)
 ```
 
@@ -204,13 +204,13 @@ End-point for getting the balance of the logged in user.  The value for the user
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_get_balance_response import UserGetBalanceResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_balance_response import UserGetBalanceResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -226,7 +226,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -236,7 +236,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetBalance
         api_response = api_instance.user_get_balance(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_get_balance: %s\n" % e)
 ```
 
@@ -284,13 +284,13 @@ End-point for getting the market positions for the logged in user, in a specific
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_get_market_position_response import UserGetMarketPositionResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_market_position_response import UserGetMarketPositionResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -306,7 +306,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -317,7 +317,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetMarketPosition
         api_response = api_instance.user_get_market_position(user_id, market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_get_market_position: %s\n" % e)
 ```
 
@@ -367,13 +367,13 @@ End-point for getting all market positions for the logged in user.  The value fo
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_get_market_positions_response import UserGetMarketPositionsResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_market_positions_response import UserGetMarketPositionsResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -389,7 +389,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -399,7 +399,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetMarketPositions
         api_response = api_instance.user_get_market_positions(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_get_market_positions: %s\n" % e)
 ```
 
@@ -447,13 +447,13 @@ End-point for retrieving the logged in user's profile.  The value for the user_i
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_get_profile_response import UserGetProfileResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_profile_response import UserGetProfileResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -469,7 +469,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -479,7 +479,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetProfile
         api_response = api_instance.user_get_profile(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_get_profile: %s\n" % e)
 ```
 
@@ -528,13 +528,13 @@ End-point for getting the market watchlist for the logged in user.  The value fo
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_get_watchlist_response import UserGetWatchlistResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_watchlist_response import UserGetWatchlistResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -550,7 +550,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -560,7 +560,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetWatchlist
         api_response = api_instance.user_get_watchlist(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_get_watchlist: %s\n" % e)
 ```
 
@@ -608,13 +608,13 @@ End-point for canceling orders.  The value for the user_id path parameter should
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_order_decrease_response import UserOrderDecreaseResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_order_decrease_response import UserOrderDecreaseResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -630,7 +630,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -641,7 +641,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrderCancel
         api_response = api_instance.user_order_cancel(user_id, order_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_order_cancel: %s\n" % e)
 ```
 
@@ -691,14 +691,14 @@ End-point for submitting orders in a market.  The value for the user_id path par
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_order_create_request import UserOrderCreateRequest
-from openapi_client.model.user_order_create_response import UserOrderCreateResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_order_create_request import UserOrderCreateRequest
+from kalshi.model.user_order_create_response import UserOrderCreateResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -714,7 +714,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -733,7 +733,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrderCreate
         api_response = api_instance.user_order_create(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_order_create: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -742,7 +742,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrderCreate
         api_response = api_instance.user_order_create(user_id, user_order_create_request=user_order_create_request)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_order_create: %s\n" % e)
 ```
 
@@ -792,14 +792,14 @@ End-point for decreasing the number of contracts on orders. This is the only kin
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_order_decrease_request import UserOrderDecreaseRequest
-from openapi_client.model.user_order_decrease_response import UserOrderDecreaseResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_order_decrease_request import UserOrderDecreaseRequest
+from kalshi.model.user_order_decrease_response import UserOrderDecreaseResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -815,7 +815,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -829,7 +829,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrderDecrease
         api_response = api_instance.user_order_decrease(user_id, order_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_order_decrease: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -838,7 +838,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrderDecrease
         api_response = api_instance.user_order_decrease(user_id, order_id, user_order_decrease_request=user_order_decrease_request)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_order_decrease: %s\n" % e)
 ```
 
@@ -889,13 +889,13 @@ End-point for getting all orders for the logged in user.  The value for the user
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_orders_get_response import UserOrdersGetResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_orders_get_response import UserOrdersGetResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -911,7 +911,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -937,7 +937,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrdersGet
         api_response = api_instance.user_orders_get(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_orders_get: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -946,7 +946,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserOrdersGet
         api_response = api_instance.user_orders_get(user_id, market_id=market_id, is_yes=is_yes, min_price=min_price, max_price=max_price, min_place_count=min_place_count, max_place_count=max_place_count, min_initial_count=min_initial_count, max_initial_count=max_initial_count, min_remaining_count=min_remaining_count, max_remaining_count=max_remaining_count, min_date=min_date, max_date=max_date, get_queue_position=get_queue_position, status=status, page_size=page_size, page_number=page_number)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_orders_get: %s\n" % e)
 ```
 
@@ -1010,12 +1010,12 @@ End-point for removing a market from the logged in user's watchlist.  The value 
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
+import kalshi
+from kalshi.api import user_api
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -1031,7 +1031,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -1041,7 +1041,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # UserRemoveWatchlist
         api_instance.user_remove_watchlist(user_id, market_id)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_remove_watchlist: %s\n" % e)
 ```
 
@@ -1092,13 +1092,13 @@ End-point for getting all trades for the logged in user.  The value for the user
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import user_api
-from openapi_client.model.user_trades_get_response import UserTradesGetResponse
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_trades_get_response import UserTradesGetResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -1114,7 +1114,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = user_api.UserApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -1134,7 +1134,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserTradesGet
         api_response = api_instance.user_trades_get(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_trades_get: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -1143,7 +1143,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserTradesGet
         api_response = api_instance.user_trades_get(user_id, market_id=market_id, order_id=order_id, min_price=min_price, max_price=max_price, min_count=min_count, max_count=max_count, min_date=min_date, max_date=max_date, page_size=page_size, page_number=page_number)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling UserApi->user_trades_get: %s\n" % e)
 ```
 

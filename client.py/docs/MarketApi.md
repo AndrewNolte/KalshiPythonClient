@@ -1,4 +1,4 @@
-# openapi_client.MarketApi
+# kalshi.MarketApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -26,19 +26,19 @@ End-point for getting data about a specific market.  The value for the market_id
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.user_get_market_response import UserGetMarketResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.user_get_market_response import UserGetMarketResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     market_id = "market_id_example" # str | Should be filled with the id of the target market
@@ -48,7 +48,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarket
         api_response = api_instance.get_market(market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market: %s\n" % e)
 ```
 
@@ -96,19 +96,19 @@ End-point for getting data about a specific market based on its ticker.  The val
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.user_get_market_response import UserGetMarketResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.user_get_market_response import UserGetMarketResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     ticker_name = "ticker_name_example" # str | Should be filled with the ticker name of the target market
@@ -118,7 +118,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketByTicker
         api_response = api_instance.get_market_by_ticker(ticker_name)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_by_ticker: %s\n" % e)
 ```
 
@@ -166,19 +166,19 @@ End-point for getting data about a specific market with data that is cached and 
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.user_get_market_response import UserGetMarketResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.user_get_market_response import UserGetMarketResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     ticker_name = "ticker_name_example" # str | Should be filled with the ticker name of the target market
@@ -188,7 +188,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketByTickerCached
         api_response = api_instance.get_market_by_ticker_cached(ticker_name)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_by_ticker_cached: %s\n" % e)
 ```
 
@@ -236,19 +236,19 @@ End-point for getting data about a specific market with data that is cached and 
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.user_get_market_response import UserGetMarketResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.user_get_market_response import UserGetMarketResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     market_id = "market_id_example" # str | Should be filled with the id of the target market
@@ -258,7 +258,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketCached
         api_response = api_instance.get_market_cached(market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_cached: %s\n" % e)
 ```
 
@@ -306,19 +306,19 @@ End-point for getting the statistics history for a market.  The value for the ma
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.get_market_history_response import GetMarketHistoryResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.get_market_history_response import GetMarketHistoryResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     market_id = "market_id_example" # str | Should be filled with the id of the target market
@@ -329,7 +329,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketHistory
         api_response = api_instance.get_market_history(market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_history: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -338,7 +338,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketHistory
         api_response = api_instance.get_market_history(market_id, last_seen_ts=last_seen_ts)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_history: %s\n" % e)
 ```
 
@@ -387,19 +387,19 @@ End-point for getting the statistics history for a market with data that is cach
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.get_market_history_response import GetMarketHistoryResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.get_market_history_response import GetMarketHistoryResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     market_id = "market_id_example" # str | Should be filled with the id of the target market
@@ -410,7 +410,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketHistoryCached
         api_response = api_instance.get_market_history_cached(market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_history_cached: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -419,7 +419,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketHistoryCached
         api_response = api_instance.get_market_history_cached(market_id, last_seen_ts=last_seen_ts)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_history_cached: %s\n" % e)
 ```
 
@@ -468,19 +468,19 @@ End-point for getting the orderbook for a market with data that is cached and so
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.get_market_order_book_response import GetMarketOrderBookResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.get_market_order_book_response import GetMarketOrderBookResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
     market_id = "market_id_example" # str | Should be filled with the id of the target market
@@ -490,7 +490,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketOrderBookCached
         api_response = api_instance.get_market_order_book_cached(market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_market_order_book_cached: %s\n" % e)
 ```
 
@@ -537,19 +537,19 @@ End-point for listing / discovering markets on Kalshi.
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.user_get_markets_response import UserGetMarketsResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.user_get_markets_response import UserGetMarketsResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
 
@@ -558,7 +558,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarkets
         api_response = api_instance.get_markets()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_markets: %s\n" % e)
 ```
 
@@ -602,19 +602,19 @@ End-point for listing / discovering markets on Kalshi with data that is cached a
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import market_api
-from openapi_client.model.user_get_markets_response import UserGetMarketsResponse
+import kalshi
+from kalshi.api import market_api
+from kalshi.model.user_get_markets_response import UserGetMarketsResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = market_api.MarketApi(api_client)
 
@@ -623,7 +623,7 @@ with openapi_client.ApiClient() as api_client:
         # GetMarketsCached
         api_response = api_instance.get_markets_cached()
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling MarketApi->get_markets_cached: %s\n" % e)
 ```
 

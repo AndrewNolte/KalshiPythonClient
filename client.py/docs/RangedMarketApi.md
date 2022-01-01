@@ -1,4 +1,4 @@
-# openapi_client.RangedMarketApi
+# kalshi.RangedMarketApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -18,19 +18,19 @@ End-point for getting data about a ranged market
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import ranged_market_api
-from openapi_client.model.get_ranged_market_response import GetRangedMarketResponse
+import kalshi
+from kalshi.api import ranged_market_api
+from kalshi.model.get_ranged_market_response import GetRangedMarketResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = ranged_market_api.RangedMarketApi(api_client)
     ranged_market_id = "ranged_market_id_example" # str | Should be filled in with a ranged market id
@@ -40,7 +40,7 @@ with openapi_client.ApiClient() as api_client:
         # GetRangedMarket
         api_response = api_instance.get_ranged_market(ranged_market_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling RangedMarketApi->get_ranged_market: %s\n" % e)
 ```
 

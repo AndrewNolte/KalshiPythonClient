@@ -1,4 +1,4 @@
-# openapi-client
+# kalshi
 This documentation describes Kalshi's rest API for market makers
 
 # Authentication
@@ -27,7 +27,7 @@ pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 
 Then import the package:
 ```python
-import openapi_client
+import kalshi
 ```
 
 ### Setuptools
@@ -41,7 +41,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import openapi_client
+import kalshi
 ```
 
 ## Getting Started
@@ -51,16 +51,16 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 
 import time
-import openapi_client
+import kalshi
 from pprint import pprint
-from openapi_client.api import account_api
-from openapi_client.model.change_subscription_request import ChangeSubscriptionRequest
-from openapi_client.model.get_notification_preferences_response import GetNotificationPreferencesResponse
-from openapi_client.model.user_get_account_history_response import UserGetAccountHistoryResponse
-from openapi_client.model.user_get_notifications_response import UserGetNotificationsResponse
+from kalshi.api import account_api
+from kalshi.model.change_subscription_request import ChangeSubscriptionRequest
+from kalshi.model.get_notification_preferences_response import GetNotificationPreferencesResponse
+from kalshi.model.user_get_account_history_response import UserGetAccountHistoryResponse
+from kalshi.model.user_get_notifications_response import UserGetNotificationsResponse
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -77,7 +77,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -88,7 +88,7 @@ change_subscription_request = ChangeSubscriptionRequest(
     try:
         # ChangeSubscription
         api_instance.change_subscription(user_id, change_subscription_request=change_subscription_request)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->change_subscription: %s\n" % e)
 ```
 
@@ -226,21 +226,21 @@ Class | Method | HTTP request | Description
 
 
 ## Notes for Large OpenAPI documents
-If the OpenAPI document is large, imports in openapi_client.apis and openapi_client.models may fail with a
+If the OpenAPI document is large, imports in kalshi.apis and kalshi.models may fail with a
 RecursionError indicating the maximum recursion limit has been exceeded. In that case, there are a couple of solutions:
 
 Solution 1:
 Use specific imports for apis and models like:
-- `from openapi_client.api.default_api import DefaultApi`
-- `from openapi_client.model.pet import Pet`
+- `from kalshi.api.default_api import DefaultApi`
+- `from kalshi.model.pet import Pet`
 
 Solution 2:
 Before importing the package, adjust the maximum recursion limit as shown below:
 ```
 import sys
 sys.setrecursionlimit(1500)
-import openapi_client
-from openapi_client.apis import *
-from openapi_client.models import *
+import kalshi
+from kalshi.apis import *
+from kalshi.models import *
 ```
 

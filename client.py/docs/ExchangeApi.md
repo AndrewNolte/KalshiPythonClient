@@ -1,4 +1,4 @@
-# openapi_client.ExchangeApi
+# kalshi.ExchangeApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -19,12 +19,12 @@ End-point for getting the exchange status
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import exchange_api
+import kalshi
+from kalshi.api import exchange_api
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -40,14 +40,14 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = exchange_api.ExchangeApi(api_client)
 
     # example, this endpoint has no required or optional parameters
     try:
         api_instance.get_exchange_status()
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling ExchangeApi->get_exchange_status: %s\n" % e)
 ```
 

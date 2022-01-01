@@ -1,0 +1,81 @@
+# flake8: noqa
+
+# import all models into this package
+# if you have many models here with many references from one model to another this may
+# raise a RecursionError
+# to avoid this, import only the models that you directly need like:
+# from from kalshi.model.pet import Pet
+# or import this package, but before doing it, use:
+# import sys
+# sys.setrecursionlimit(n)
+
+from kalshi.model.account_history_entry import AccountHistoryEntry
+from kalshi.model.account_history_entry_data import AccountHistoryEntryData
+from kalshi.model.bank_account_details import BankAccountDetails
+from kalshi.model.change_subscription_request import ChangeSubscriptionRequest
+from kalshi.model.confirm_password_reset_request import ConfirmPasswordResetRequest
+from kalshi.model.create_user_request import CreateUserRequest
+from kalshi.model.create_user_response import CreateUserResponse
+from kalshi.model.deposit import Deposit
+from kalshi.model.deposit_history import DepositHistory
+from kalshi.model.get_market_history_response import GetMarketHistoryResponse
+from kalshi.model.get_market_order_book_response import GetMarketOrderBookResponse
+from kalshi.model.get_notification_preferences_response import GetNotificationPreferencesResponse
+from kalshi.model.get_ranged_market_by_ticker_response import GetRangedMarketByTickerResponse
+from kalshi.model.get_ranged_market_response import GetRangedMarketResponse
+from kalshi.model.get_ranged_markets_response import GetRangedMarketsResponse
+from kalshi.model.get_user_deposits_response import GetUserDepositsResponse
+from kalshi.model.get_user_withdrawals_response import GetUserWithdrawalsResponse
+from kalshi.model.login_request import LoginRequest
+from kalshi.model.login_response import LoginResponse
+from kalshi.model.market import Market
+from kalshi.model.market_position import MarketPosition
+from kalshi.model.market_stats_point import MarketStatsPoint
+from kalshi.model.notification import Notification
+from kalshi.model.notification_list import NotificationList
+from kalshi.model.order import Order
+from kalshi.model.order_book import OrderBook
+from kalshi.model.order_history import OrderHistory
+from kalshi.model.order_list import OrderList
+from kalshi.model.portfolio_measurement import PortfolioMeasurement
+from kalshi.model.price_level import PriceLevel
+from kalshi.model.public_trade import PublicTrade
+from kalshi.model.public_trade_list import PublicTradeList
+from kalshi.model.ranged_market import RangedMarket
+from kalshi.model.reset_password_request import ResetPasswordRequest
+from kalshi.model.settlement_history import SettlementHistory
+from kalshi.model.settlement_source import SettlementSource
+from kalshi.model.subscription_preference import SubscriptionPreference
+from kalshi.model.trade_history import TradeHistory
+from kalshi.model.trades_get_response import TradesGetResponse
+from kalshi.model.user import User
+from kalshi.model.user_change_password_request import UserChangePasswordRequest
+from kalshi.model.user_deposit_request import UserDepositRequest
+from kalshi.model.user_deposit_response import UserDepositResponse
+from kalshi.model.user_get_account_history_response import UserGetAccountHistoryResponse
+from kalshi.model.user_get_balance_response import UserGetBalanceResponse
+from kalshi.model.user_get_market_position_response import UserGetMarketPositionResponse
+from kalshi.model.user_get_market_positions_response import UserGetMarketPositionsResponse
+from kalshi.model.user_get_market_response import UserGetMarketResponse
+from kalshi.model.user_get_markets_response import UserGetMarketsResponse
+from kalshi.model.user_get_notifications_response import UserGetNotificationsResponse
+from kalshi.model.user_get_portfolio_history_request import UserGetPortfolioHistoryRequest
+from kalshi.model.user_get_portfolio_history_response import UserGetPortfolioHistoryResponse
+from kalshi.model.user_get_portfolio_value_response import UserGetPortfolioValueResponse
+from kalshi.model.user_get_profile_response import UserGetProfileResponse
+from kalshi.model.user_get_watchlist_response import UserGetWatchlistResponse
+from kalshi.model.user_list_ledgerx_bank_accounts_response import UserListLedgerxBankAccountsResponse
+from kalshi.model.user_order_create_request import UserOrderCreateRequest
+from kalshi.model.user_order_create_response import UserOrderCreateResponse
+from kalshi.model.user_order_decrease_request import UserOrderDecreaseRequest
+from kalshi.model.user_order_decrease_response import UserOrderDecreaseResponse
+from kalshi.model.user_orders_get_response import UserOrdersGetResponse
+from kalshi.model.user_trade import UserTrade
+from kalshi.model.user_trade_list import UserTradeList
+from kalshi.model.user_trades_get_response import UserTradesGetResponse
+from kalshi.model.user_update_profile_request import UserUpdateProfileRequest
+from kalshi.model.user_withdrawal_request import UserWithdrawalRequest
+from kalshi.model.user_withdrawal_response import UserWithdrawalResponse
+from kalshi.model.watchlist import Watchlist
+from kalshi.model.withdrawal import Withdrawal
+from kalshi.model.withdrawal_history import WithdrawalHistory

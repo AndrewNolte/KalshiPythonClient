@@ -1,4 +1,4 @@
-# openapi_client.DefaultApi
+# kalshi.DefaultApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -18,19 +18,19 @@ End-point for getting all trades for all markets.
 
 ```python
 import time
-import openapi_client
-from openapi_client.api import default_api
-from openapi_client.model.trades_get_response import TradesGetResponse
+import kalshi
+from kalshi.api import default_api
+from kalshi.model.trades_get_response import TradesGetResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient() as api_client:
+with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = default_api.DefaultApi(api_client)
     trades_date = "trades_date_example" # str | Restricts the response to trades during a certain day. Format: YYYY-MM-DD (optional)
@@ -43,7 +43,7 @@ with openapi_client.ApiClient() as api_client:
         # GetTrades
         api_response = api_instance.get_trades(trades_date=trades_date, page_size=page_size, page_number=page_number)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling DefaultApi->get_trades: %s\n" % e)
 ```
 

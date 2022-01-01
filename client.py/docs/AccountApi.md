@@ -1,4 +1,4 @@
-# openapi_client.AccountApi
+# kalshi.AccountApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -23,13 +23,13 @@ End-point for changing e-mail subscription mode for the current user.  This end-
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import account_api
-from openapi_client.model.change_subscription_request import ChangeSubscriptionRequest
+import kalshi
+from kalshi.api import account_api
+from kalshi.model.change_subscription_request import ChangeSubscriptionRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -45,7 +45,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
@@ -57,7 +57,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # ChangeSubscription
         api_instance.change_subscription(user_id)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->change_subscription: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -65,7 +65,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # ChangeSubscription
         api_instance.change_subscription(user_id, change_subscription_request=change_subscription_request)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->change_subscription: %s\n" % e)
 ```
 
@@ -114,13 +114,13 @@ End-point for getting e-mail subscription mode for the current user.  The value 
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import account_api
-from openapi_client.model.get_notification_preferences_response import GetNotificationPreferencesResponse
+import kalshi
+from kalshi.api import account_api
+from kalshi.model.get_notification_preferences_response import GetNotificationPreferencesResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -136,7 +136,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -146,7 +146,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # GetNotificationPreferences
         api_response = api_instance.get_notification_preferences(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->get_notification_preferences: %s\n" % e)
 ```
 
@@ -194,12 +194,12 @@ End-point for marking a notification as read.  The value for the user_id path pa
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import account_api
+import kalshi
+from kalshi.api import account_api
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -215,7 +215,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | user_id should be filled with your user_id provided on log_in
@@ -225,7 +225,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     try:
         # NotificationMarkRead
         api_instance.notification_mark_read(user_id, notification_id)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->notification_mark_read: %s\n" % e)
 ```
 
@@ -274,13 +274,13 @@ End-point for getting the logged in user's important past actions and events rel
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import account_api
-from openapi_client.model.user_get_account_history_response import UserGetAccountHistoryResponse
+import kalshi
+from kalshi.api import account_api
+from kalshi.model.user_get_account_history_response import UserGetAccountHistoryResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -296,7 +296,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -312,7 +312,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetAccountHistory
         api_response = api_instance.user_get_account_history(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->user_get_account_history: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -321,7 +321,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetAccountHistory
         api_response = api_instance.user_get_account_history(user_id, should_return_deposits=should_return_deposits, should_return_withdrawals=should_return_withdrawals, should_return_orders=should_return_orders, should_return_settlements=should_return_settlements, should_return_trades=should_return_trades, limit=limit)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->user_get_account_history: %s\n" % e)
 ```
 
@@ -375,13 +375,13 @@ End-point for getting notifications for the current logged in user.  The value f
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import account_api
-from openapi_client.model.user_get_notifications_response import UserGetNotificationsResponse
+import kalshi
+from kalshi.api import account_api
+from kalshi.model.user_get_notifications_response import UserGetNotificationsResponse
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -397,7 +397,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -409,7 +409,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetNotifications
         api_response = api_instance.user_get_notifications(user_id, page_size, page_number)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling AccountApi->user_get_notifications: %s\n" % e)
 ```
 

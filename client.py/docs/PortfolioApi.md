@@ -1,4 +1,4 @@
-# openapi_client.PortfolioApi
+# kalshi.PortfolioApi
 
 All URIs are relative to *https://trading-api.kalshi.com/v1*
 
@@ -19,14 +19,14 @@ End-point for getting the logged in user's portfolio historical track.  The valu
 * Api Key Authentication (cookie):
 ```python
 import time
-import openapi_client
-from openapi_client.api import portfolio_api
-from openapi_client.model.user_get_portfolio_history_request import UserGetPortfolioHistoryRequest
-from openapi_client.model.user_get_portfolio_history_response import UserGetPortfolioHistoryResponse
+import kalshi
+from kalshi.api import portfolio_api
+from kalshi.model.user_get_portfolio_history_response import UserGetPortfolioHistoryResponse
+from kalshi.model.user_get_portfolio_history_request import UserGetPortfolioHistoryRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = kalshi.Configuration(
     host = "https://trading-api.kalshi.com/v1"
 )
 
@@ -42,7 +42,7 @@ configuration.api_key['cookie'] = 'YOUR_API_KEY'
 # configuration.api_key_prefix['cookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = portfolio_api.PortfolioApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
@@ -58,7 +58,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetPortfolioHistory
         api_response = api_instance.user_get_portfolio_history(user_id)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling PortfolioApi->user_get_portfolio_history: %s\n" % e)
 
     # example passing only required values which don't have defaults set
@@ -67,7 +67,7 @@ with openapi_client.ApiClient(configuration) as api_client:
         # UserGetPortfolioHistory
         api_response = api_instance.user_get_portfolio_history(user_id, user_get_portfolio_history_request=user_get_portfolio_history_request)
         pprint(api_response)
-    except openapi_client.ApiException as e:
+    except kalshi.ApiException as e:
         print("Exception when calling PortfolioApi->user_get_portfolio_history: %s\n" % e)
 ```
 
